@@ -1,31 +1,27 @@
+import {validatorList} from  './validators.js';
+import * as params from  './validationParameters.js';
+
 function validator() {
   const input = document.getElementById('input');
-  const button = document.getElementById('button');
-  const button2 = document.getElementById('button2');
-  const result = document.getElementById('result');
+  const validateButton = document.getElementById('validateButton');
+  const clearButton = document.getElementById('clearButton');
+  const resultPlaceholder = document.getElementById('resultPlaceholder');
 
-  button.addEventListener('click', () => {
-    if (input.value) {
-      if (Number.isInteger(input.value)) {
-        if (
-          Number(input.value) > 0 &&
-          Number(input.value) < 100 &&
-          Number(input.value) % 2 === 0
-        ) {
-          result.innerHTML = 'Valid';
-        } else {
-          result.innerHTML = 'Invalid';
-        }
-        result.innerHTML = 'Valid';
-      } else {
-        result.innerHTML = 'Invalid';
-      }
-    } else {
-      result.innerHTML = 'Invalid';
-    }
+  validateButton.addEventListener('click', () => {
+
+    let validationError;
+    validatorList.forEach(validator => {
+     const validationResult = validator(input.value);
+     if(!validationResult){
+      validationError = true;
+     } 
+    });
+
+    validationError ? resultPlaceholder.innerHTML = params.RESPONSE_INVALID : resultPlaceholder.innerHTML = params.RESPONSE_VALID
+
   });
 
-  button2.addEventListener('click', () => {
+  clearButton.addEventListener('click', () => {
     input.value = '';
     result.innerHTML = '';
   });

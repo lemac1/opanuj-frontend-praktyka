@@ -1,13 +1,15 @@
-export function f1(a, b) {
-  return a + b;
+export function add(valueA: number, valueB: number): number  | string {
+  return valueA + valueB;
 }
-export function f2(a, b) {
-  return a - b;
+export function substract(valueA: number, valueB: number): number | string {
+  return valueA - valueB;
 }
-export function f3(a, b) {
-  return a * b;
+export function multiply(valueA: number, valueB: number): number | string {
+  return valueA * valueB;
 }
 
-export function f4(a, b) {
-  return a / b;
+export function divide(valueA: number, valueB: number): number | string {
+  if(valueB == 0)
+    return "Cannot divide by 0";
+  return valueA / valueB;
 }
